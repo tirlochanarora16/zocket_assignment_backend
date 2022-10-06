@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 const productRoutes = require("./routes/produt");
 const campaignRoutes = require("./routes/campaign");
 
 const app = express();
+dotenv.config();
 
 app.use(express.json());
 
@@ -19,7 +21,7 @@ app.use("/campaign", campaignRoutes);
 
 mongoose
   .connect(
-    "mongodb+srv://tirlochan:password0000@cluster0.so02t.mongodb.net/zocket"
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.so02t.mongodb.net/zocket`
   )
   .then(() => {
     console.log("db connected");
